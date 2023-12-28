@@ -1,14 +1,13 @@
-[package]
-name = "bevy_test"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+resolver = "2"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-bevy =  { version = "0.12.1", features = ["dynamic_linking"] } 
-bevy_egui = "0.24.0"
-rand = "0.8.5"
+members = [
+    "bevy_test",
+    "game_server",
+    "game_client",
+    "game_shared",
+    "bevy_ping_pong"
+]
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
@@ -17,7 +16,3 @@ opt-level = 1
 # Enable high optimizations for dependencies (incl. Bevy), but not for our code:
 [profile.dev.package."*"]
 opt-level = 3
-
-[[example]]
-name = "test_state"
-path = "src/examples/test_state.rs"

@@ -5,6 +5,7 @@ use std::{
 };
 
 use bevy::{app::ScheduleRunnerPlugin, prelude::*, utils::Duration};
+use bevy_ping_pong::{PingPongPlugin, PlayerBundle, PORT, PROTOCOL_ID};
 use bevy_replicon::replicon_core::NetworkChannels;
 use bevy_replicon::{
     prelude::*,
@@ -16,13 +17,13 @@ use bevy_replicon::{
         ClientId, ConnectionConfig, ServerEvent,
     },
 };
-use bevy_ping_pong::{PlayerBundle, PingPongPlugin, PORT, PROTOCOL_ID};
 
 fn main() {
     App::new()
-        .add_plugins((DefaultPlugins, ReplicationPlugins))
+        .add_plugins((MinimalPlugins, ReplicationPlugins))
         .add_plugins(PingPongPlugin)
         .add_systems(Startup, init_server.map(Result::unwrap))
+        .add_systems(Startup, bevy_ping_pong::PingPongPlugin::init_system_server)
         .run();
 }
 
@@ -44,7 +45,7 @@ fn init_server(
     let socket = UdpSocket::bind(public_addr)?;
     let server_config = ServerConfig {
         current_time,
-        max_clients: 10,
+        max_clients: 2,
         protocol_id: PROTOCOL_ID,
         authentication: ServerAuthentication::Unsecure,
         public_addresses: vec![public_addr],
@@ -62,7 +63,7 @@ fn init_server(
             ..default()
         },
     ));
-    commands.spawn(PlayerBundle::new(SERVER_ID, Vec2::ZERO, Color::GREEN));
+    //commands.spawn(PlayerBundle::new(SERVER_ID, Vec2::ZERO, Color::GREEN));
     println!("init system");
     Ok(())
 }

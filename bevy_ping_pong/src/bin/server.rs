@@ -4,7 +4,19 @@ use std::{
     time::SystemTime,
 };
 
-use bevy::{app::ScheduleRunnerPlugin, prelude::*, utils::Duration};
+use bevy::{
+    a11y::AccessibilityPlugin,
+    app::ScheduleRunnerPlugin,
+    core_pipeline::CorePipelinePlugin,
+    diagnostic::DiagnosticsPlugin,
+    input::InputPlugin,
+    prelude::*,
+    render::{settings::WgpuSettings, RenderPlugin},
+    scene::ScenePlugin,
+    time::TimePlugin,
+    utils::Duration,
+    winit::WinitPlugin,
+};
 use bevy_ping_pong::{PingPongPlugin, PlayerBundle, PORT, PROTOCOL_ID};
 use bevy_replicon::replicon_core::NetworkChannels;
 use bevy_replicon::{
@@ -20,8 +32,25 @@ use bevy_replicon::{
 
 fn main() {
     App::new()
-        .add_plugins((MinimalPlugins, ReplicationPlugins))
-        .add_plugins(PingPongPlugin)
+        .add_plugins((
+            // //DefaultPlugins
+            // DefaultPlugins.set(Womd,RenderPlugin {
+            //     render_creation: WgpuSettings {
+            //         backends: None,
+            //         ..default()
+            //     }
+            //     .into(),
+            // }).set(TimePlugin {
+
+            // }),
+            MinimalPlugins,
+            // WindowPlugin {
+            //     primary_window: None,
+            //     exit_condition: bevy::window::ExitCondition::DontExit,
+            //     ..Default::default()
+            // }
+        ))
+        .add_plugins((ReplicationPlugins, PingPongPlugin))
         .add_systems(Startup, init_server.map(Result::unwrap))
         .add_systems(Startup, bevy_ping_pong::PingPongPlugin::init_system_server)
         .run();

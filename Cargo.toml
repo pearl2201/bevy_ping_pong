@@ -2,10 +2,6 @@
 resolver = "2"
 
 members = [
-    "bevy_test",
-    "game_server",
-    "game_client",
-    "game_shared",
     "bevy_ping_pong"
 ]
 

@@ -1058,20 +1058,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bevy_test"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "bevy_egui",
- "bevy_renet",
- "bevy_replicon",
- "clap",
- "rand",
- "serde",
- "smooth-bevy-cameras",
-]
-
-[[package]]
 name = "bevy_text"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2052,31 +2038,6 @@ dependencies = [
  "futures-io",
  "parking",
  "pin-project-lite",
-]
-
-[[package]]
-name = "game_client"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "game_shared",
-]
-
-[[package]]
-name = "game_server"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "game_shared",
-]
-
-[[package]]
-name = "game_shared"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "bevy_egui",
- "rand",
 ]
 
 [[package]]
